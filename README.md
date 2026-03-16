@@ -3,10 +3,10 @@
 ![License](https://img.shields.io/badge/license-MIT-green)
 
 
-<table>
+<table border=0>
   <tr>
     <td>
-# bitBalance 
+      <h1>bitBalance</h1>
 </td>    
     <td>
 <img src="./web/logo.png">      
