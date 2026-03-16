@@ -5,7 +5,7 @@
 
 # bitBalance 
 <p align="center">
-  <img src="./web/logo.png" width="120">
+  <img src="./web/logo.png">
 </p>
 
 
