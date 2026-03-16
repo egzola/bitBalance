@@ -114,14 +114,14 @@ async function load(rescan = true) {
     for (const w of wallets) {
 
         const btc = w.balance
-        let perc = total > 0 ? ((btc / total) * 100).toFixed(2) : "0.00";
+        let perc = total > 0 ? ((btc / total) * 100).toFixed(1) : "0.00";
 
         labels.push(w.wallet)
         values.push(btc)
 
         rows += `
 <tr onclick="editWallet('${w.xpub}')">
-<td>${w.wallet}</td>
+<td class="walletName">${w.wallet}</td>
 <td class="percentage">${perc}%</td>
 <td class="balance" title="${btcToSats(btc).toLocaleString()} sats">${btc.toFixed(8)}</td>
 <td class="chevron">›</td>
@@ -266,6 +266,7 @@ function renderChart(labels, data) {
 
         options: {
 
+            maintainAspectRatio: false,
             cutout: "72%",
 
             layout: {
