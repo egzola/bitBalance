@@ -54,7 +54,7 @@ Your wallet data never leaves your infrastructure.
 
 ## Screenshot
 
-<img src="./web/screenshot.png">
+<img src="./web/screenshot.png" style="height:50%;width:50%;">
 
 ---
 
