@@ -1,6 +1,7 @@
 services:
 
   app:
+    container_name: bitbalance
     build: .
     restart: unless-stopped
 
