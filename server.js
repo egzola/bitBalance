@@ -22,7 +22,8 @@ const PORT =
 
 const appPort = process.env.PORT || 3710;
 
-const DATA_FILE = "./data/wallets.json";
+const DATA_DIR = process.env.DATA_DIR || "./data"
+const DATA_FILE = DATA_DIR + "/wallets.json"
 
 const app = express()
 
