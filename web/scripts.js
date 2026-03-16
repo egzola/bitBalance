@@ -495,7 +495,7 @@ const centerText = {
         ctx.textBaseline = "middle"
 
         ctx.fillStyle = "#e6e6e6"
-        ctx.font = "600 22px system-ui"
+        ctx.font = "600 17px system-ui"
 
         ctx.fillText(totalBTC.toFixed(8), x, y - 8)
 
@@ -507,7 +507,6 @@ const centerText = {
         ctx.restore()
     }
 }
-
 
 
 load(false)
