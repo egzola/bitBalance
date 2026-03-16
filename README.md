@@ -4,7 +4,7 @@
 
 
 # bitBalance  
-![bitBalance logo](logo.png)
+![bitBalance logo](./web/logo.png)
 
 A simple and private **Bitcoin wallet balance tracker** for XPUB, YPUB and ZPUB.
 
