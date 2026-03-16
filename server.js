@@ -267,6 +267,11 @@ async function loadWallets() {
 
 }
 
+app.get("/health", async (req, res) => {
+  res.json({ok:true})
+})
+
+
 app.get("/wallets", async (req, res) => {
 
   let rescan = req.query.rescan === "true";
