@@ -25,7 +25,8 @@ support: https://github.com/egzola/bitbalance/issues
 dependencies:
   - electrs
 
-gallery: []
+gallery:
+  - web/screenshot.png
 
 releaseNotes: |
   Initial release.

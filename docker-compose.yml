@@ -13,7 +13,7 @@ services:
       - ELECTRUM_PORT=50001
 
     volumes:
-      - ./wallets.json:/app/wallets.json
+      - ./data/wallets.json:/app/data/wallets.json
 
     networks:
       - umbrel_main_network

@@ -14,6 +14,11 @@ Runs locally on **Umbrel** and keeps all wallet data private.
 
 ---
 
+## License
+
+MIT
+
+
 ## Why bitBalance?
 
 Many wallet tracking services require sending your XPUB to external servers.
