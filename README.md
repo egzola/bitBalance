@@ -20,11 +20,6 @@ Designed to run locally on **Umbrel**.
 
 ---
 
-## Screenshots
-
-![bitBalance Screenshot](screenshot.png)
-
----
 
 ## How it works
 
