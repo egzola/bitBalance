@@ -560,11 +560,11 @@ function donateModal() {
       <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=lightning:${addr}"
            style="margin:10px auto;display:block">
 
-      <div style="margin-top:10px;font-size:14px;color:#aaa">
+      <div style="margin-top:10px;font-size:13px;color:#aaa">
         Lightning Address
       </div>
 
-      <div style="margin-top:4px;font-family:monospace">
+      <div style="margin-top:4px;font-size:14px;font-family:monospace">
         ${addr}
       </div>
     `,
