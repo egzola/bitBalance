@@ -34,6 +34,11 @@ app.use(express.static('web'))
 let wallets = []
 
 try {
+  // check if file exists, if not, create it with empty array
+  if (!fs.existsSync(DATA_FILE)) {
+    fs.mkdirSync(DATA_DIR, { recursive: true })
+    fs.writeFileSync(DATA_FILE, "[]") // escreve um array vazio para evitar erros de JSON.parse quando o arquivo for lido pela primeira vez, garantindo que o formato do arquivo seja sempre válido.
+  }
   wallets = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))
 } catch {
   wallets = []
