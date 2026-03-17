@@ -13,17 +13,14 @@ const { zpubToXpub, ypubToXpub } = require('./derive');
 
 const isDocker = fs.existsSync("/.dockerenv");
 
-const HOST =
-  process.env.ELECTRUM_HOST ||
-  (isDocker ? "electrs" : "localhost");
-
-const PORT =
-  parseInt(process.env.ELECTRUM_PORT || "50001", 10);
+const HOST = process.env.ELECTRUM_HOST || "127.0.0.1";
+const PORT = parseInt(process.env.ELECTRUM_PORT || "50001", 10);
 
 const appPort = process.env.PORT || 3710;
 
-const DATA_DIR = __dirname + "/data";
+const DATA_DIR = isDocker  ? "/data"  : __dirname + "/data";
 const DATA_FILE = DATA_DIR + "/wallets.json";
+
 
 const app = express();
 
@@ -34,15 +31,27 @@ app.use(express.static('web'));
 let wallets = [];
 let electrum = null;
 
+console.log("DATA_DIR:", DATA_DIR)
+console.log("DATA_FILE:", DATA_FILE)
 
 try {
-  // check if file exists, if not, create it with empty array
+  fs.mkdirSync(DATA_DIR, { recursive: true })
+  console.log("dir ensured")
+
   if (!fs.existsSync(DATA_FILE)) {
-    fs.mkdirSync(DATA_DIR, { recursive: true })
-    fs.writeFileSync(DATA_FILE, "[]") // escreve um array vazio para evitar erros de JSON.parse quando o arquivo for lido pela primeira vez, garantindo que o formato do arquivo seja sempre válido.
+    console.log("creating wallets.json...")
+    fs.writeFileSync(DATA_FILE, "[]")
   }
-  wallets = JSON.parse(fs.readFileSync(DATA_FILE, 'utf8'))
-} catch {
+
+} catch (e) {
+  console.error("INIT FS ERROR:", e)
+}
+
+try {
+  const raw = fs.readFileSync(DATA_FILE, 'utf8')
+  wallets = JSON.parse(raw || "[]")
+} catch (e) {
+  console.error("READ ERROR:", e)
   wallets = []
 }
 
@@ -179,7 +188,7 @@ async function scanBranch(root, change, type, isBranch = false) {
       if (!payment) {
         throw new Error("Invalid address type")
       }
-      
+
       batch.push(payment.address)
 
       index++
