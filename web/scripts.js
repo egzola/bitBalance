@@ -504,12 +504,12 @@ const centerText = {
         ctx.textBaseline = "middle"
 
         ctx.fillStyle = "#e6e6e6"
-        ctx.font = "600 17px system-ui"
+        ctx.font = "600 18px system-ui"
 
         ctx.fillText(totalBTC.toFixed(8), x, y - 8)
 
         ctx.fillStyle = "#9ca3af"
-        ctx.font = "400 13px system-ui"
+        ctx.font = "400 14px system-ui"
 
         ctx.fillText("BTC", x, y + 14)
 
