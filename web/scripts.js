@@ -90,7 +90,6 @@ function stopScanIndicator() {
 
 async function load(rescan = true) {
 
-    await new Promise(r => setTimeout(r, 600)) // pequena espera para evitar flash de indicador
     clearTable();
     startScanIndicator();
 
@@ -117,7 +116,7 @@ async function load(rescan = true) {
 
     const labels = []
     const values = []
-
+    
     for (const w of wallets) {
 
         const btc = w.balance
@@ -575,8 +574,12 @@ function donateModal() {
 }
 
 
+document.addEventListener('DOMContentLoaded', async function () {
 
-load(false)
+    await new Promise(resolve => setTimeout(resolve, 500)); // pequena espera para garantir que tudo esteja pronto
 
-setInterval(updatePrices, 60*1000); // atualiza preço a cada minuto
+    load(false);
+   
+   setInterval(updatePrices, 60*1000); // atualiza preço a cada minuto
 
+});
