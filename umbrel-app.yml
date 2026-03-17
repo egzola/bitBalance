@@ -3,7 +3,7 @@ manifestVersion: 1.1
 id: bitbalance
 name: bitBalance
 
-tagline: Monitor bitcoin balances from XPUB / YPUB / ZPUB
+tagline: Monitor Bitcoin wallet balances privately using XPUB, YPUB, or ZPUB
 
 category: bitcoin
 
@@ -13,9 +13,7 @@ port: 3710
 description: >-
   Simple Bitcoin wallet balance monitor using XPUB, YPUB or ZPUB.
 
-
   Connects to your local Electrs server for maximum privacy, without relying on third-party APIs.
-
 
   Supports multiple wallets, automatic gap limit scanning, and real-time balance updates directly from your Umbrel node.
 
@@ -25,22 +23,17 @@ repo: https://github.com/egzola/bitbalance
 support: https://github.com/egzola/bitbalance/issues
 
 submitter: egzola
-submission: https://github.com/getumbrel/umbrel-apps/pull/5082
 
 dependencies:
   - electrs
 
-gallery: []
+gallery:
+  - screenshot.png
 
 releaseNotes: >-
   Initial release of bitBalance.
 
-
-  Features XPUB/YPUB/ZPUB support, Electrum integration, gap limit scanning, and multi-wallet tracking.
-  Provides a simple interface to monitor Bitcoin balances directly from your Umbrel node.
-  No third-party APIs required, ensuring maximum privacy and security for your Bitcoin holdings.
-  Future updates will include additional features and improvements based on user feedback.
-  Check the GitHub repo for more details and updates:
-  https://github.com/egzola/bitbalance
-
-  
+  - XPUB / YPUB / ZPUB support
+  - Electrum (Electrs) integration
+  - Automatic gap limit scanning
+  - Multi-wallet tracking
