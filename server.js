@@ -1,14 +1,14 @@
-const express = require('express')
-const fs = require('fs')
-const crypto = require('crypto')
-const bitcoin = require('bitcoinjs-lib')
-const ElectrumClient = require('electrum-client')
+const express = require('express');
+const fs = require('fs');
+const crypto = require('crypto');
+const bitcoin = require('bitcoinjs-lib');
+const ElectrumClient = require('electrum-client');
 
-const ecc = require('tiny-secp256k1')
-const { BIP32Factory } = require('bip32')
-const bip32 = BIP32Factory(ecc)
+const ecc = require('tiny-secp256k1');
+const { BIP32Factory } = require('bip32');
+const bip32 = BIP32Factory(ecc);
 
-const { zpubToXpub, ypubToXpub } = require('./derive')
+const { zpubToXpub, ypubToXpub } = require('./derive');
 
 
 const isDocker = fs.existsSync("/.dockerenv");
@@ -22,16 +22,18 @@ const PORT =
 
 const appPort = process.env.PORT || 3710;
 
-const DATA_DIR = process.env.DATA_DIR || "./data"
-const DATA_FILE = DATA_DIR + "/wallets.json"
+const DATA_DIR = process.env.DATA_DIR || "./data";
+const DATA_FILE = DATA_DIR + "/wallets.json";
 
-const app = express()
+const app = express();
 
-app.use(express.json())
-app.use(express.urlencoded({ extended: true }))
-app.use(express.static('web'))
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.static('web'));
 
-let wallets = []
+let wallets = [];
+let electrum = null;
+
 
 try {
   // check if file exists, if not, create it with empty array
@@ -43,8 +45,6 @@ try {
 } catch {
   wallets = []
 }
-
-let electrum = null
 
 
 async function connectElectrum() {
