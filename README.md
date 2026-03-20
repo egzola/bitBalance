@@ -2,7 +2,6 @@
 ![Umbrel](https://img.shields.io/badge/Runs%20on-Umbrel-blue)
 ![License](https://img.shields.io/badge/license-MIT-green)
 
-
 # bitBalance
 <img src="./web/logo.png">
 
@@ -13,11 +12,6 @@ bitBalance allows you to monitor multiple Bitcoin wallets using **your own Elect
 Runs locally on **Umbrel** and keeps all wallet data private.
 
 ---
-
-## License
-
-MIT
-
 
 ## Why bitBalance?
 
@@ -31,15 +25,13 @@ This exposes:
 
 bitBalance avoids this by connecting **only to your own node**.
 
-Architecture:
-
 XPUB / YPUB / ZPUB  
 ↓  
 bitBalance  
 ↓  
 Electrs  
 ↓  
-Bitcoin Core
+Bitcoin Core  
 
 Your wallet data never leaves your infrastructure.
 
@@ -112,13 +104,43 @@ bitBalance is designed with privacy in mind.
 
 ## Architecture
 
-Browser  
-↓  
-bitBalance (Node.js backend)  
-↓  
+bitBalance derives wallet addresses locally and queries Electrs directly for balance and transaction data.
+
+XPUB / YPUB / ZPUB  
+↓ (local derivation)  
+bitBalance  
+↓ (TCP connection)  
 Electrs  
 ↓  
 Bitcoin Core  
+
+No external services are involved in this process.
+
+All balance calculations are deterministic and based solely on your node’s data.
+
+---
+
+## Umbrel Integration Details
+
+This app is designed to run inside Umbrel’s managed environment.
+
+- Uses the built-in Electrs service via `$APP_ELECTRS_NODE_IP`
+- Does not define custom Docker networks (Umbrel handles service networking)
+- Persists state using `${APP_DATA_DIR}/data`
+- Includes a `.gitkeep` file to ensure volume path consistency in clean deployments
+
+These constraints ensure compatibility with Umbrel’s runtime and predictable behavior across installations.
+
+---
+
+## Design Principles
+
+- Privacy by default (no external calls)
+- Deterministic behavior (no hidden state)
+- Minimal dependencies
+- Explicit over implicit
+
+This project favors simplicity and control over abstraction.
 
 ---
 
