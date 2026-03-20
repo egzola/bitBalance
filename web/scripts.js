@@ -582,11 +582,20 @@ document.addEventListener('DOMContentLoaded', async function () {
 
     await new Promise(resolve => setTimeout(resolve, 500)); // pequena espera para garantir que tudo esteja pronto
 
+    const appVersion = await fetch("/appversion")
+        .then(res => res.json())
+        .then(data => data.appversion)
+        .catch(() => "1.0.0");
+
+    document.title = `bitBalance ${appVersion}`;
+
+
     load(false);
 
     document.getElementById("donateBtn").addEventListener("click", donateModal);
 
     setInterval(updatePrices, 60 * 1000); // atualiza preço a cada minuto
-
+  
+    
 });
 
