@@ -34,6 +34,12 @@ header {
     font-size: 16px;
 }
 
+#app_version {
+    font-size: 12px;
+    opacity: .6;
+    margin-left: 5px;
+
+}
 
 header h1 {
     margin: 0;
@@ -60,12 +66,6 @@ header h1 {
     margin-bottom: 20px;
 }
 
-.total-card {
-    display: flex;
-    justify-content: space-between;
-    font-size: 22px;
-    font-weight: 700;
-}
 
 table {
     width: 100%;
@@ -74,8 +74,13 @@ table {
 
 th {
     text-align: left;
+    font-size: 14px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, .72);
+    letter-spacing: .2px;
+    padding: 14px 4px;
     border-bottom: 2px solid var(--border);
-    padding: 12px 4px;
+
 }
 
 td {
@@ -93,33 +98,98 @@ td {
     font-family: ui-monospace, monospace;
 }
 
-.btc-value {
-    font-size: 24px;
-    font-weight: 700;
+
+
+
+.total-wrapper {
+    display: grid;
+    grid-template-columns: 2.2fr 1.5fr 1.12fr;
+    gap: 28px;
+    align-items: center;
+    padding-top: 28px;
+    padding-bottom: 28px;
+    row-gap: 22px;
 }
 
-.usd-value {
-    font-size: 14px;
-    opacity: .7;
-    margin-top: 4px;
+.metric {
+    min-width: 0;
 }
+
+.main-metric {
+    display: block;
+}
+
+.side-metric {
+    padding-left: 20px;
+    border-left: 1px solid rgba(255, 255, 255, .07);
+
+    display: flex;
+    align-items: center;
+    gap: 16px;
+}
+
+.label {
+    font-size: 14px;
+    opacity: .58;
+    letter-spacing: .2px;
+    margin-bottom: 4px;
+}
+
+.big-value {
+    font-size: 46px;
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -1px;
+}
+
+
+.sub-value {
+    font-size: 22px;
+    opacity: .88;
+}
+
+.side-value {
+    font-size: 16px;
+    line-height: 1.35;
+    white-space: nowrap;
+}
+
+.icon {
+    width: 54px;
+    height: 54px;
+    border-radius: 50%;
+    background: #5b7cff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    flex-shrink: 0;
+}
+
+.icon-svg {
+    width: 26px;
+    height: 26px;
+    opacity: .96;
+}
+
 
 
 .logo-title {
     display: flex;
     align-items: center;
-    gap: 7px;
+    gap: 10px;
     user-select: none;
 }
 
 
 tbody tr {
     cursor: pointer;
-    transition: background .15s ease;
+    transition: background .15s ease, transform .12s ease;
 }
 
 tbody tr:hover {
     background: #232833;
+    transform: translateX(2px);
 }
 
 .chevron {
@@ -144,10 +214,16 @@ tbody tr:hover .chevron {
 .btn-primary {
     background: var(--accent);
     color: white;
+    border-radius: 10px;
+    padding: 12px 18px;
+    font-weight: 700;
+    box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+    transition: transform .12s ease, opacity .12s ease;
 }
 
 .btn-primary:hover {
-    opacity: .9;
+    opacity: .96;
+    transform: translateY(-1px);
 }
 
 #chart {
@@ -157,12 +233,27 @@ tbody tr:hover .chevron {
 }
 
 footer {
-    font-size: 13px;
-    text-align: center;
-    margin-top: 10px;
-    margin-bottom: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+    margin: 14px 0 24px;
+    
     user-select: none;
+
+    font-size: 13px;
+    opacity: .72;
+
 }
+
+
+
+.footer-sep {
+    opacity: .45;
+}
+
+
 
 .loading {
     text-align: center;
@@ -234,31 +325,34 @@ footer {
 
 
 .donate-btn {
-  background: none;
-  border: none;
-  color: #aaffaa;
-  font: inherit;
-  cursor: pointer;
-  padding: 0;
+    background: none;
+    border: none;
+    color: #aaffaa;
+    font: inherit;
+    cursor: pointer;
+    padding: 0;
+    transition: opacity .12s ease, transform .12s ease;
 }
 
 .donate-btn:hover {
-  text-decoration: underline;
+    text-decoration: none;
+    opacity: .88;
+    transform: translateY(-1px);
 }
 
 .donate-btn:active {
-  opacity: 0.7;
+    opacity: 0.7;
 }
 
 .donate-btn:focus-visible {
-  outline: 1px solid #aaffaa;
-  outline-offset: 2px;
+    outline: 1px solid #aaffaa;
+    outline-offset: 2px;
 }
 
 
 
 
-@media (max-width: 600px) {
+@media (max-width: 900px) {
     header {
         padding: 0 5px;
     }
@@ -298,11 +392,40 @@ footer {
     }
 
     #t th:first-child {
-        width:130px;
+        width: 130px;
     }
 
     #t td:first-child {
-        width:130px;
+        width: 130px;
+    }
+
+
+
+    .total-wrapper {
+        grid-template-columns: 1fr;
+        gap: 18px;
+    }
+
+    .big-value {
+        font-size: 30px;
+    }
+
+    .side-value {
+        font-size: 16px;
+    }
+
+    .side-metric {
+        border-left: none;
+        padding-left: 0;
+    }
+
+    .header-buttons {
+        gap: 8px;
+    }
+
+    .btn-primary {
+        padding: 10px 12px;
+        font-size: 14px;
     }
 
 

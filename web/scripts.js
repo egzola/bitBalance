@@ -47,7 +47,13 @@ async function updatePrices() {
     await loadBTCPrice();
 
     const usd = totalBTC * btcPriceUSD;
+
     document.getElementById("totalUSD").innerText = "$" + usd.toLocaleString(undefined, { maximumFractionDigits: 2 }) + " USD";
+    document.getElementById("btcPrice").innerText = "1 BTC = $" + btcPriceUSD.toLocaleString(undefined, { maximumFractionDigits: 2 }) + " USD";
+
+    const date = new Date(lastPriceFetch);
+    document.getElementById("lastUpdated").innerText = date.toLocaleTimeString();
+
 }
 
 
@@ -104,6 +110,15 @@ async function load(rescan = true) {
         return
     }
 
+    // check if there is no wallets and show show: no wallets configured yet
+    if(wallets.length === 0) {
+        stopScanIndicator();
+        document.querySelector("#t tbody").innerHTML = `
+        <tr>
+          <td colspan="3">ℹ️ No wallets configured yet</td>
+        </tr>`;
+        return;
+    }
 
     walletsCache = wallets
     stopScanIndicator();
@@ -551,19 +566,20 @@ function copyText(text) {
 
 function donateModal() {
 
-    const addr = "sendmore@walletofsatoshi.com"
+    const addr = "thanksalot@walletofsatoshi.com"
 
     Swal.fire({
         title: "Send a Lightning tip ⚡",
         html: `
-      <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=lightning:${addr}"
-           style="margin:10px auto;display:block">
-
-      <div style="margin-top:10px;font-size:13px;color:#aaa">
+      <div style="margin-top:10px;font-size:16px;color:#888">
         If this tool is useful to you, consider a tip to support development and maintenance. Thank you! 🙏
         <br><br>
         Lightning Address ⚡
       </div>
+
+        <img src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=lightning:${addr}"
+           style="margin:10px auto;display:block">
+
 
       <div style="margin-top:4px;font-size:14px;font-family:monospace">
         ${addr}
@@ -588,6 +604,7 @@ document.addEventListener('DOMContentLoaded', async function () {
         .catch(() => "1.0.0");
 
     document.title = `bitBalance ${appVersion}`;
+    document.getElementById("app_version").innerText = `v${appVersion}`;
 
 
     load(false);
@@ -595,7 +612,7 @@ document.addEventListener('DOMContentLoaded', async function () {
     document.getElementById("donateBtn").addEventListener("click", donateModal);
 
     setInterval(updatePrices, 60 * 1000); // atualiza preço a cada minuto
-  
-    
+
+
 });
 
